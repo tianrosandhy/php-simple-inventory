@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2017 at 07:30 AM
+-- Generation Time: Jul 30, 2017 at 04:13 PM
 -- Server version: 10.1.10-MariaDB
 -- PHP Version: 7.0.3
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `colorcard`
+-- Database: `simple_inventory`
 --
 
 -- --------------------------------------------------------
@@ -37,19 +37,19 @@ CREATE TABLE `cc_divisi` (
 --
 
 INSERT INTO `cc_divisi` (`id`, `nama_divisi`, `stat`) VALUES
-(1, 'Citra Warna 01', 1),
-(2, 'Citra Warna 02', 1),
-(3, 'Citra Warna 03', 1),
-(4, 'Citra Warna 04', 1),
-(5, 'Citra Warna 05', 1),
-(6, 'Citra Warna 06', 1),
-(7, 'Citra Warna 07', 1),
-(8, 'Citra Warna 08', 1),
+(1, 'Purchasing', 1),
+(2, 'Accounting', 1),
+(3, 'Warehouse', 1),
+(4, 'Human Resource', 1),
+(5, 'General Affair', 1),
+(6, 'Sales', 1),
+(7, 'Information Technology', 1),
+(8, 'Customer Relation', 1),
 (9, 'Citra Warna 9', 9),
-(10, 'Citra Warna 10', 1),
+(10, 'Quality Assurement', 1),
 (11, 'Citra Warna 11', 9),
-(12, 'Citra Warna 09', 1),
-(13, 'Citra Warna 11', 1);
+(12, 'Production', 1),
+(13, 'Distribution', 1);
 
 -- --------------------------------------------------------
 
@@ -67,6 +67,13 @@ CREATE TABLE `cc_kirim` (
   `stat` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cc_kirim`
+--
+
+INSERT INTO `cc_kirim` (`id`, `id_master`, `id_divisi`, `tgl`, `jml`, `ket`, `stat`) VALUES
+(1, 3, 13, '2017-07-30 00:00:00', 65, 'Data sisa periode', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -81,6 +88,18 @@ CREATE TABLE `cc_master` (
   `stat` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cc_master`
+--
+
+INSERT INTO `cc_master` (`id`, `nama`, `tag`, `tgl`, `stat`) VALUES
+(1, 'Gelas Hadiah', 'wira', '2017-07-25 00:00:00', 1),
+(2, 'Sarung Hadiah', 'ayu', '2017-07-26 00:00:00', 1),
+(3, 'Pulpen Faster', 'ayu', '2017-07-25 00:00:00', 1),
+(4, 'Voucher Pulsa', 'dayu', '2017-07-27 00:00:00', 1),
+(5, 'Kertas Invoice (dus)', 'wira', '2017-07-26 00:00:00', 1),
+(6, 'Aqua Botol', 'dayu', '2017-07-25 00:00:00', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -93,6 +112,13 @@ CREATE TABLE `cc_project` (
   `tgl` datetime NOT NULL,
   `stat` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cc_project`
+--
+
+INSERT INTO `cc_project` (`id`, `nama_project`, `tgl`, `stat`) VALUES
+(1, 'Laporan Inventory Juli 2017', '2017-07-30 15:32:36', 1);
 
 -- --------------------------------------------------------
 
@@ -112,6 +138,27 @@ CREATE TABLE `cc_temp` (
   `stat` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `cc_temp`
+--
+
+INSERT INTO `cc_temp` (`id`, `id_project`, `tb`, `id_master`, `id_divisi`, `tgl`, `jml`, `ket`, `stat`) VALUES
+(1, 1, 'cc_terima', 1, 0, '2017-07-25 00:00:00', 0, 'Data awal', 1),
+(2, 1, 'cc_terima', 2, 0, '2017-07-26 00:00:00', 0, 'Data awal', 1),
+(3, 1, 'cc_terima', 3, 0, '2017-07-25 00:00:00', 0, 'Data awal', 1),
+(4, 1, 'cc_terima', 4, 0, '2017-07-27 00:00:00', 0, 'Data awal', 1),
+(5, 1, 'cc_terima', 5, 0, '2017-07-26 00:00:00', 0, 'Data awal', 1),
+(6, 1, 'cc_terima', 6, 0, '2017-07-25 00:00:00', 0, 'Data awal', 1),
+(7, 1, 'cc_terima', 3, 0, '2017-07-28 00:00:00', 300, 'dibeli pak made', 1),
+(8, 1, 'cc_terima', 2, 0, '2017-07-30 00:00:00', 150, 'dikirim sebagian oleh pak sugih', 1),
+(9, 1, 'cc_terima', 6, 0, '2017-07-27 00:00:00', 5000, 'beli', 1),
+(10, 1, 'cc_terima', 4, 0, '2017-07-29 00:00:00', 400, 'untuk persediaan quota pulsa sebulan', 1),
+(11, 1, 'cc_terima', 1, 0, '2017-07-30 00:00:00', 800, '', 1),
+(12, 1, 'cc_terima', 5, 0, '2017-07-30 00:00:00', 50, 'stok untuk masing-masing divisi', 1),
+(13, 1, 'cc_terima', 3, 0, '2017-07-30 00:00:00', 200, 'baru dibeli ayu', 1),
+(16, 1, 'cc_kirim', 3, 13, '2017-07-29 00:00:00', 80, 'Dikirim ke Distribution', 1),
+(17, 1, 'cc_terjual', 3, 13, '2017-07-30 00:00:00', 15, 'kehabisan pulpen', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -126,6 +173,18 @@ CREATE TABLE `cc_terima` (
   `ket` varchar(300) DEFAULT NULL,
   `stat` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cc_terima`
+--
+
+INSERT INTO `cc_terima` (`id`, `id_master`, `tgl`, `jml`, `ket`, `stat`) VALUES
+(1, 1, '2017-07-30 00:00:00', 800, 'Data awal periode', 1),
+(2, 2, '2017-07-30 00:00:00', 150, 'Data awal periode', 1),
+(3, 3, '2017-07-30 00:00:00', 485, 'Data awal periode', 1),
+(4, 4, '2017-07-30 00:00:00', 400, 'Data awal periode', 1),
+(5, 5, '2017-07-30 00:00:00', 50, 'Data awal periode', 1),
+(6, 6, '2017-07-30 00:00:00', 5000, 'Data awal periode', 1);
 
 -- --------------------------------------------------------
 
@@ -209,7 +268,12 @@ INSERT INTO `cms_admin_log` (`id`, `username`, `tgl`, `expired`, `token`, `ip`, 
 (6, 'admin', '2017-07-04 05:25:53', '2017-07-04 17:25:53', '7380ae29990cb723955ce30f7a2ba822fd479669', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
 (7, 'admin', '2017-07-04 09:51:28', '2017-07-04 21:51:28', '98c1f89c3c6849332601c4bf6cc0d158607ad783', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
 (8, 'admin', '2017-07-05 03:24:25', '2017-07-05 15:24:25', 'ed3e08a5348fe61c41e7c9d7a9a5219f4041f04f', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
-(9, 'admin', '2017-07-05 05:12:36', '2017-07-05 17:12:36', '6fbcdf8202f29748e95572958f9f832dbe34eda6', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36');
+(9, 'admin', '2017-07-05 05:12:36', '2017-07-05 17:12:36', '6fbcdf8202f29748e95572958f9f832dbe34eda6', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
+(10, 'admin', '2017-07-21 02:24:46', '2017-07-21 14:24:46', '95ae6dde76e4e5dc672cd4d29028ab23568c0126', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
+(11, 'admin', '2017-07-30 14:40:34', '2017-07-31 02:40:34', '769c11ee9774003dfe2a724f0f30f219e8c9d03d', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
+(12, 'admin', '2017-07-30 14:59:12', '2017-07-31 02:59:12', 'ce7de48eb9bd8ee9b9130fb67d8d99e3f0b017ba', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
+(13, 'admin', '2017-07-30 14:59:46', '2017-07-31 02:59:46', 'fb491ba4ed16da2d7c7c968a1e632d92e58b4c16', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'),
+(14, 'admin', '2017-07-30 15:06:03', '2017-07-31 03:06:03', '3d69ddafbfaa8642ff8fd203eaa50db56b126c3f', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36');
 
 -- --------------------------------------------------------
 
@@ -235,8 +299,8 @@ INSERT INTO `cms_option` (`id`, `param`, `label`, `content`, `type`, `def`, `sta
 (1, 'session_key', 'Session Key', 'tianrosandhy_sess_key', 'text', 'tianrosandhy_sess_key', 9),
 (2, 'backend_paging', 'Data Per Page (Admin)', '20', 'number', '20', 1),
 (3, 'frontend_paging', 'Data Per Page (Front)', '10', 'number', '10', 1),
-(4, 'webname', 'Website Name', 'Aplikasi Monitoring Color Card CWA', 'text', 'Website Name', 1),
-(5, 'websubtitle', 'Website Sub Title', 'Another TianRosandhy''s CMS Site', 'text', 'Another TianRosandhy''s CMS Site', 1),
+(4, 'webname', 'Website Name', 'Aplikasi Monitoring Inventory', 'text', 'Website Name', 1),
+(5, 'websubtitle', 'Website Sub Title', 'Another TianRosandhy''s App', 'text', 'Another TianRosandhy''s CMS Site', 1),
 (6, 'max_login_try', 'Login Failed Max Try', '5', 'number', '5', 1),
 (7, 'header_image', 'Header Image', NULL, 'text', NULL, 1),
 (8, 'favicon', 'Favicon', NULL, 'text', NULL, 1),
@@ -325,27 +389,27 @@ ALTER TABLE `cc_divisi`
 -- AUTO_INCREMENT for table `cc_kirim`
 --
 ALTER TABLE `cc_kirim`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cc_master`
 --
 ALTER TABLE `cc_master`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `cc_project`
 --
 ALTER TABLE `cc_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `cc_temp`
 --
 ALTER TABLE `cc_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `cc_terima`
 --
 ALTER TABLE `cc_terima`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `cc_terjual`
 --
@@ -360,7 +424,7 @@ ALTER TABLE `cms_admin_fail`
 -- AUTO_INCREMENT for table `cms_admin_log`
 --
 ALTER TABLE `cms_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `cms_option`
 --
