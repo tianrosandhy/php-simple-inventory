@@ -130,8 +130,8 @@ if($show == 1) :
 							$n++;
 						}
 						else{
-							$masuk += $terima;
-							$keluar += $kirim;
+							$masuk += intval($terima);
+							$keluar += intval($kirim);
 						}
 					}
 
@@ -229,8 +229,8 @@ elseif($show == 2):
 								$n++;
 							}
 							else{
-								$masuk += $kirim;
-								$keluar += $jual;
+								$masuk += intval($kirim);
+								$keluar += intval($jual);
 							}
 						}
 

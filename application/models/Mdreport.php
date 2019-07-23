@@ -46,7 +46,7 @@ Class Mdreport extends CI_Model{
 
 		$sql3 = query("SELECT * FROM cc_kirim WHERE stat <> 9 ORDER BY tgl");
 		foreach($sql3->result_array() as $row3){
-			$tgl = strtotime($row3['tgl'] + $n);
+			$tgl = strtotime($row3['tgl']) + $n;
 			$arr[$row3['id_master']][$tgl]["kirim"] = $row3['jml'];
 			$arr[$row3['id_master']][$tgl]["ket"] = $row3['ket'];
 			$n++;
