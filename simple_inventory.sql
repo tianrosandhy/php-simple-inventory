@@ -222,7 +222,7 @@ CREATE TABLE `cms_admin` (
 --
 
 INSERT INTO `cms_admin` (`username`, `name`, `email`, `password`, `token`, `priviledge`) VALUES
-('admin', 'Administrator', 'tianrosandhy@gmail.com', '$2y$10$NtVX2YLOV3nbuL8H5yYcJ.o3Q3VBKuBV3rfHg2NovHMUEDgM6o8aS', 'd8ed7457a3464c783a4485c5173c8adce2210c1a', 1);
+('admin', 'Administrator', 'admin@localhost', '$2y$10$NtVX2YLOV3nbuL8H5yYcJ.o3Q3VBKuBV3rfHg2NovHMUEDgM6o8aS', 'd8ed7457a3464c783a4485c5173c8adce2210c1a', 1);
 
 -- --------------------------------------------------------
 
