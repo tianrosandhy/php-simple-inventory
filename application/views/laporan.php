@@ -193,7 +193,7 @@ elseif($show == 2):
 					$divisi = $listdiv[$iddivisi];
 
 					foreach($isi as $idmaster => $isis){
-						$ccname = $list_cc[$idmaster];
+						$ccname = isset($list_cc[$idmaster]) ? $list_cc[$idmaster] : null;
 						$mutasi = 0;
 						$masuk = $keluar = 0;
 
